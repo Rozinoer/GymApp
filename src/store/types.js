@@ -1,0 +1,5 @@
+export const LOAD_CLIENTS = 'LOAD_CLIENTS'
+export const LOAD_EX = 'LOAD_EX'
+export const ADD_CLIENT = 'ADD_CLIENT'
+export const EDIT_CLIENT = 'EDIT_CLIENT'
+export const ADD_EX = 'ADD_EX'
