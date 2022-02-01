@@ -13,17 +13,9 @@ export const AddNewClient = ({ navigation }) => {
     data: "",
     phone: "unavable",
   };
-  const pressHandler = () => {
-    navigation.navigate("Main");
-  };
 
   return (
     <View style={styles.wrapper}>
-      {/*<Navbar 
-            title='Add'
-            onPress= {pressHandler}
-        />*/}
-
       <View style={styles.container}>
         <View style={styles.mainInfo}>
           <TextInput

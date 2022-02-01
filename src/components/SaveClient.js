@@ -9,7 +9,7 @@ export const SaveClient = ({ value, navigation }) => {
 
   const presHandler = () => {
     dispatch(addClient(value));
-    navigation.navigate("Main");
+    navigation.navigate("Clients");
   };
 
   return (

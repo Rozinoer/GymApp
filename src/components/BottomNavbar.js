@@ -8,31 +8,41 @@ import {
 } from "react-native";
 import { THEME } from "../theme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Ionicons, FontAwesome5 } from "@expo/vector-icons";
 
 export const BottomNavbar = ({ navigation }) => {
   return (
     <View style={styles.navbar}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Main")}
+        onPress={() => navigation.navigate("Clients")}
       >
-        <AntDesign name="home" size={32} color="black" />
+        <Ionicons name="people" size={24} color="black" />
       </TouchableOpacity>
-
-      {/* <TouchableOpacity
-            style={styles.button}
-            // onPress={props.navigate}
-        >
-            
-        </TouchableOpacity>
-
-        <TouchableOpacity
-            style={styles.button}
-            // onPress={props.navigate}
-        >
-            
-        </TouchableOpacity>*/}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("ExBase")}
+      >
+        <FontAwesome5 name="dumbbell" size={24} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Profile")}
+      >
+        <Ionicons name="home" size={36} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Clients")}
+      >
+        <FontAwesome5 name="carrot" size={24} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Clients")}
+      >
+        <AntDesign name="wechat" size={24} color="black" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -44,11 +54,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-
     width: Dimensions.get("window").width,
-    borderRadius: THEME.REGULAR_BORDER_RADIUS,
 
-    // backgroundColor: THEME.SILVER,
+    backgroundColor: THEME.SILVER,
     // elevation: 2,
   },
   container: {

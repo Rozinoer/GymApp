@@ -7,7 +7,8 @@ export class DB {
     return new Promise((resolve, reject) => {
       db.transaction((tx) => {
         tx.executeSql(
-          "create table if not exists clients (id integer primary key not null, name text, surname text);",
+          "create table if not exists clients (id integer primary key not null, \
+            name text, surname text, data text, height integer, weight integer,phone text);",
           [],
           resolve(),
           (_, error) => reject(error)
@@ -49,13 +50,12 @@ export class DB {
       });
     });
   }
-
-  static createClient({ name, surname }) {
+  static createClient({ name, surname, data, height, weight ,phone }) {
     return new Promise((resolve, reject) => {
       db.transaction((tx) => {
         tx.executeSql(
-          "insert into clients (name, surname) values (?, ?)",
-          [name, surname],
+          "insert into clients (name, surname, data, phone, height, weight) values (?, ?, ?, ?, ?, ?)",
+          [name, surname, data, phone, height, weight],
           (_, result) => resolve(result.insertId),
           (_, error) => reject(error)
         );
