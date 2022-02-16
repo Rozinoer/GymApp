@@ -7,7 +7,6 @@ import {
   Dimensions,
 } from "react-native";
 import { THEME } from "../theme";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign, Ionicons, FontAwesome5 } from "@expo/vector-icons";
 
 export const BottomNavbar = ({ navigation }) => {
@@ -17,31 +16,31 @@ export const BottomNavbar = ({ navigation }) => {
         style={styles.button}
         onPress={() => navigation.navigate("Clients")}
       >
-        <Ionicons name="people" size={24} color="black" />
+        <Ionicons name="people" size={24} color={"black"} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("ExBase")}
       >
-        <FontAwesome5 name="dumbbell" size={24} color="black" />
+        <FontAwesome5 name="dumbbell" size={24} color={"black"} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Profile")}
       >
-        <Ionicons name="home" size={36} color="black" />
+        <Ionicons name="home" size={36} color={"black"} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Clients")}
       >
-        <FontAwesome5 name="carrot" size={24} color="black" />
+        <FontAwesome5 name="carrot" size={24} color={"black"} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Clients")}
       >
-        <AntDesign name="wechat" size={24} color="black" />
+        <AntDesign name="wechat" size={24} color={"black"} />
       </TouchableOpacity>
     </View>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
-
+import { THEME } from "../theme";
 export const ClientNavbar = ({ client, navigation }) => {
   return (
     <View style={styles.navbar}>

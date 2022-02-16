@@ -27,18 +27,18 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   infoBlock: {
-    flex:1,
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  name:{
-    borderBottomWidth:0.2,
-    borderTopWidth:0.2,
-    borderColor: 'white',
-    height:'100%',
-    flex:1,
-    justifyContent: 'center',
+  name: {
+    borderBottomWidth: 0.2,
+    borderTopWidth: 0.2,
+    borderColor: "white",
+    height: "100%",
+    flex: 1,
+    justifyContent: "center",
     marginLeft: 10,
   },
   avatar: {

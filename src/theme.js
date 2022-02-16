@@ -11,7 +11,7 @@ export const THEME = {
   RED: "#FF2C00",
   GREEN: "#84E900",
   BLUE: "#0776A0",
-
+  BLACK: "rgb(14,14,14)",
   CARROT: "#fc7649",
   SILVER: "#ebebeb",
 

@@ -12,7 +12,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { loadEx } from "../store/actions/client";
 import { THEME } from "../theme";
-import { Navbar } from "../components/Navbar";
 
 export const ClientEx = ({ route, navigation }) => {
   const { client } = route.params;
@@ -23,17 +22,9 @@ export const ClientEx = ({ route, navigation }) => {
     dispatch(loadEx(client.id));
   }, [dispatch]);
 
-  const onPress = () => {
-    navigation.navigate("Info");
-  };
-
   const allEx = useSelector((state) => state.client.allEx);
   return (
     <View style={styles.wrapper}>
-      {/* <Navbar 
-                onPress= {onPress}
-                title= 'Упражнения'
-            />*/}
       <View style={styles.exercises}>
         {allEx.map((ex) => {
           return (

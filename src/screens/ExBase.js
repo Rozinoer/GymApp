@@ -11,18 +11,8 @@ export const ExBase = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button title="New plan" onPress={() => navigation.navigate("Add")} />
+        <Button title="New plan" onPress={() => navigation.navigate("AddNewPlan")} />
       ),
-      headerSearchBarOptions: {
-        barTintColor: THEME.SILVER,
-        onChangeText: (event) => setSearch(event.nativeEvent.text),
-      },
-      headerStyle: {
-        backgroundColor: "black",
-      },
-      headerTitleStyle: {
-        color: "white",
-      },
     });
   }, []);
 
@@ -32,7 +22,6 @@ export const ExBase = ({ navigation }) => {
         <TrainingPlan />
         <TrainingPlan />
       </ScrollView>
-
       <View>
         <BottomNavbar navigation={navigation} />
       </View>
@@ -44,6 +33,5 @@ const styles = StyleSheet.create({
   profile: {
     flex: 1,
   },
-  scrollView: {
-  },
+  scrollView: {},
 });

@@ -26,16 +26,6 @@ export const ClientsScreen = ({ navigation }) => {
 
   useEffect(() => {
     navigation.setOptions({
-      headerSearchBarOptions: {
-        barTintColor: THEME.SILVER,
-        onChangeText: (event) => setSearch(event.nativeEvent.text),
-      },
-      headerStyle: {
-        backgroundColor: "black",
-      },
-      headerTitleStyle: {
-        color: "white",
-      },
       headerRight: () => (
         <Button title="New client" onPress={() => navigation.navigate("Add")} />
       ),

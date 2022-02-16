@@ -2,6 +2,7 @@ const initialState = {
   isLoading: true,
   isSignout: false,
   userToken: null,
+  user: null,
 };
 
 export const authReducer = (prevState = initialState, action) => {
@@ -17,12 +18,25 @@ export const authReducer = (prevState = initialState, action) => {
         ...prevState,
         isSignout: false,
         userToken: action.token,
+        user: action.user,
+      };
+    case "SIGN_UP":
+      return {
+        ...prevState,
+        isSignout: false,
+        userToken: action.token,
+        user: action.user,
       };
     case "SIGN_OUT":
       return {
         ...prevState,
         isSignout: true,
         userToken: null,
+      };
+    case "loadUserData":
+      return {
+        ...prevState,
+        user: action.user,
       };
     default:
       return prevState;
