@@ -8,16 +8,21 @@ import {
 } from "react-native";
 import { THEME } from "../theme";
 import { AntDesign, Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import { loadPlans } from "../db";
+import { useSelector } from "react-redux";
 
 export const BottomNavbar = ({ navigation }) => {
+  const isCoach = useSelector((state) => state.auth.isCoach);
   return (
     <View style={styles.navbar}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Clients")}
-      >
-        <Ionicons name="people" size={24} color={"black"} />
-      </TouchableOpacity>
+      {isCoach == true ? (
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Clients")}
+        >
+          <Ionicons name="people" size={24} color={"black"} />
+        </TouchableOpacity>
+      ) : null}
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("ExBase")}
@@ -32,7 +37,9 @@ export const BottomNavbar = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Clients")}
+        onPress={async () => {
+          const plan = await loadPlans();
+        }}
       >
         <FontAwesome5 name="carrot" size={24} color={"black"} />
       </TouchableOpacity>
@@ -48,27 +55,11 @@ export const BottomNavbar = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   navbar: {
-    paddingHorizontal: 15,
     height: 90,
     flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    width: Dimensions.get("window").width,
-
+    justifyContent: 'space-around',
+    alignItems:'center',
     backgroundColor: THEME.SILVER,
-    // elevation: 2,
-  },
-  container: {
-    flex: 2,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  topLine: {
-    flex: 1,
-    height: 25,
-    width: "100%",
-    backgroundColor: "white",
   },
   text: {
     color: "white",
@@ -76,14 +67,12 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   button: {
-    marginRight: 15,
     justifyContent: "center",
     alignItems: "center",
     width: 60,
     height: 60,
     borderRadius: 30,
     backgroundColor: "white",
-    elevation: 2,
   },
   icon: {},
 });

@@ -13,12 +13,13 @@ import { BottomNavbar } from "../components/BottomNavbar";
 import { ProfileText } from "../components/ProfileText";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut, loadUserData } from "../store/actions/auth";
+import { loadPlan } from "../store/actions/drillPlan";
 
 export const ProfileScreen = ({ navigation }) => {
   const user = useSelector((state) => state.auth.user);
 
   const handlePress = useCallback(async () => {
-    const supported = await Linking.canOpenURL('https://' + user.network);
+    const supported = await Linking.canOpenURL("https://" + user.network);
 
     if (supported) {
       await Linking.openURL(vk);
@@ -32,7 +33,9 @@ export const ProfileScreen = ({ navigation }) => {
   };
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => <Button title="logout" onPress={logout} color={"white"} />,
+      headerRight: () => (
+        <Button title="logout" onPress={logout} color={"white"} />
+      ),
     });
     dispatch(loadUserData());
   }, []);
@@ -55,7 +58,7 @@ export const ProfileScreen = ({ navigation }) => {
                     value={user.name + " " + user.surname}
                     flag="1"
                   />
-                  <ProfileText value={user.city + ', ' + user.country} />
+                  <ProfileText value={user.city + ", " + user.country} />
                 </View>
                 <View style={styles.clientInfo}>
                   <View style={styles.statistics}>
@@ -95,7 +98,7 @@ export const ProfileScreen = ({ navigation }) => {
                 </View>
               </View>
               <View style={styles.commonInfo}>
-                <Text>Profile screen</Text>
+                {/* <Text>Profile screen</Text> */}
               </View>
             </View>
             <View style={styles.navbar}>
@@ -152,8 +155,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   commonInfo: {
-    backgroundColor: "yellow",
+    backgroundColor: "white",
     flex: 1,
   },
-  navbar: {},
+  navbar: {
+    width: '100%'
+  },
 });

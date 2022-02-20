@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addDay } from "../store/actions/drillPlan";
 
-export const AddNewDay = ({navigation}) => {
+export const AddNewDay = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [drillName, setDrillName] = useState("");
@@ -24,7 +24,7 @@ export const AddNewDay = ({navigation}) => {
 
   const saveDay = () => {
     dispatch(addDay({ title, drill }));
-    navigation.navigate('AddNewPlan')
+    navigation.navigate("AddNewPlan");
   };
   const saveDrill = () => {
     setDrill((prevState) => {

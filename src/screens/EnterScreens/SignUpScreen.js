@@ -65,7 +65,7 @@ export const SignUpScreen = ({ navigation }) => {
   const logup = () => {
     dispatch(signUp(selfInfo));
   };
-  const [isEnabled, setIsEnabled] = useState();
+  const [isEnabled, setIsEnabled] = useState('false');
   let selfInfo = {
     name: "",
     surname: "",

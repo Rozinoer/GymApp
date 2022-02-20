@@ -37,7 +37,7 @@ export const ClientsScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollView}>
         {allClients.map((client) => {
           return (
-            <Client key={client.id} client={client} navigation={navigation} />
+            <Client key={client.id} client={client.clientData} navigation={navigation} />
           );
         })}
       </ScrollView>

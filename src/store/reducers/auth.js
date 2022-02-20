@@ -3,6 +3,7 @@ const initialState = {
   isSignout: false,
   userToken: null,
   user: null,
+  isCoach: false
 };
 
 export const authReducer = (prevState = initialState, action) => {
@@ -37,6 +38,7 @@ export const authReducer = (prevState = initialState, action) => {
       return {
         ...prevState,
         user: action.user,
+        isCoach: action.isCoach
       };
     default:
       return prevState;

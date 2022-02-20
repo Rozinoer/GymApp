@@ -10,7 +10,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { signIn, signUp } from "../../store/actions/auth";
 import { ProfileText } from "../../components/ProfileText";
-import { THEME } from "../../theme";
 
 export const SignInScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -18,7 +17,7 @@ export const SignInScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
   const login = () => {
-    dispatch(signIn('test@test.com', "password"));
+    dispatch(signIn(username, password));
   };
   return (
     <View style={styles.container}>

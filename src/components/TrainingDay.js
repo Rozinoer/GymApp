@@ -10,7 +10,6 @@ export const TrainingDay = () => {
 
   useEffect(() => {
     setEx((prev) => [...prev, <DrillInfo key={Date.now()}/>]);
-    console.log("render");
   }, [amountEx]);
   return (
     <View style={styles.container}>

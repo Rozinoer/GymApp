@@ -1,26 +1,19 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
-  TouchableOpacity,
-  StyleSheet,
   View,
   Text,
+  StyleSheet,
+  Button,
+  Linking,
+  TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
-import { useDispatch } from "react-redux";
-import { editClient } from "../store/actions/client";
 import { BottomNavbar } from "../components/BottomNavbar";
 import { ProfileText } from "../components/ProfileText";
 
 export const AboutClient = ({ route, navigation }) => {
   const { client } = route.params;
-  // const handlePress = useCallback(async () => {
-  //   const supported = await Linking.canOpenURL(vk);
 
-  //   if (supported) {
-  //     await Linking.openURL(vk);
-  //   } else {
-  //     console.log("cant open url");
-  //   }
-  // }, ['']);
   let state = {
     id: client.id,
     name: client.name,
@@ -29,24 +22,30 @@ export const AboutClient = ({ route, navigation }) => {
     weight: client.weight,
     data: client.data,
     phone: client.phone,
+    city: client.city,
+    country: client.country,
   };
-  // const dispatch = useDispatch();
-
-  // const editSave = () => {
-  //   dispatch(editClient(state));
-  //   setModalVisible(!modalVisible);
-  // };
-
   return (
     <View style={styles.profile}>
       <View style={styles.wrapper}>
         <View style={styles.info}>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <ProfileText value={state.name + ' ' +state.surname} flag="1" />
-            <ProfileText value="Moscow, Russia" />
+            <ProfileText value={state.name + " " + state.surname} flag="1" />
+            <ProfileText value={state.city + ", " + state.country} />
           </View>
           <View style={styles.clientInfo}>
-           
+            <View style={styles.statistics}>
+              <ProfileText value="5 753" flag="1" />
+              <ProfileText value="followers" />
+            </View>
+            <View style={styles.statistics}>
+              <ProfileText value="5 753" flag="1" />
+              <ProfileText value="followers" />
+            </View>
+            <View style={styles.statistics}>
+              <ProfileText value="5 753" flag="1" />
+              <ProfileText value="followers" />
+            </View>
           </View>
           <View
             style={{
@@ -55,13 +54,32 @@ export const AboutClient = ({ route, navigation }) => {
               width: 300,
             }}
           >
-            <TouchableOpacity onPress={''}>
-              <ProfileText value={''} />
+            <ProfileText value={state.aboutSelf} />
+            <Text
+              style={{
+                textAlign: "center",
+                marginTop: 5,
+                marginBottom: 15,
+              }}
+            >
+              <ProfileText value={state.aboutTraining} />
+            </Text>
+            {/* <TouchableOpacity onPress={handlePress}>
+              <ProfileText value={state.network} />
+            </TouchableOpacity> */}
+            {/* <ProfileText value={user.phone} /> */}
+          </View>
+          <View style={{flexDirection:"row", justifyContent:'space-between', width: "70%"}}>
+            <TouchableOpacity style={styles.btn}>
+              <ProfileText value="Назначить тренировку" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn}>
+              <ProfileText value="Написать" />
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.commonInfo}>
-          <Text>Profile screen</Text>
+          {/* <Text>Profile screen</Text> */}
         </View>
       </View>
       <View style={styles.navbar}>
@@ -77,13 +95,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "column",
-    // backgroundColor: "green",
+  },
+  activityIndecator: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    backgroundColor: "black",
+    width: "100%",
   },
   wrapper: {
     flex: 1,
     width: "100%",
-    margin: 10,
-    backgroundColor: "rgb(14,14,14)",
+    backgroundColor: "black",
   },
   info: {
     width: "100%",
@@ -103,9 +126,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   commonInfo: {
-    backgroundColor: "yellow",
+    backgroundColor: "white",
     flex: 1,
   },
-  navbar: {},
+  navbar: {
+    width: "100%",
+  },
+  btn: {padding:10,borderWidth: 1, borderColor:'white', borderRadius: 10}
 });
-

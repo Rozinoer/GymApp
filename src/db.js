@@ -1,93 +1,154 @@
-import * as SQLite from "expo-sqlite";
+import {
+  getFirestore,
+  setDoc,
+  getDoc,
+  doc,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where,
+} from "@firebase/firestore";
+import { auth } from "./firebase";
 
-const db = SQLite.openDatabase("client.db");
+const week = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+  "Понедельник",
+  "Вторник",
+  "Четверг"
+];
+export const db = getFirestore();
 
-export class DB {
-  static init() {
-    return new Promise((resolve, reject) => {
-      db.transaction((tx) => {
-        tx.executeSql(
-          "create table if not exists clients (id integer primary key not null, \
-            name text, surname text, data text, height integer, weight integer,phone text);",
-          [],
-          resolve(),
-          (_, error) => reject(error)
-        );
-      });
-      db.transaction((tx) => {
-        tx.executeSql(
-          "create table if not exists ex (id integer primary key not null, name text, weight text, approaches text, repetitions text, rest text, clientID integer, foreign key (clientID) references clients (id));",
-          [],
-          resolve(),
-          (_, error) => reject(error)
-        );
+export const setUserData = async (selfInfo) => {
+  await setDoc(doc(db, "users", auth.currentUser.uid), {
+    name: selfInfo.name,
+    surname: selfInfo.surname,
+    phone: selfInfo.phone,
+    city: selfInfo.city,
+    country: selfInfo.country,
+    network: selfInfo.network,
+    aboutSelf: selfInfo.aboutme,
+    aboutTraining: selfInfo.abouttrain,
+    isCoach: selfInfo.isCoach,
+  });
+};
+export const getUserData = async () => {
+  const userRef = doc(db, "users", auth.currentUser.uid);
+  const userSnap = await getDoc(userRef);
+  if (userSnap.exists()) {
+    return userSnap.data();
+  } else {
+    return null;
+  }
+};
+export const addNewPlan = async (plan, title, disc) => {
+  const planRef = collection(db, "users", auth.currentUser.uid, "plans");
+  const docRef = await addDoc(planRef, { title, discription: disc });
+  plan.forEach((i) => {
+    i.drills.forEach(async (drill) => {
+      const d = doc(
+        db,
+        "users",
+        auth.currentUser.uid,
+        "plans",
+        docRef.id,
+        i.day,
+        drill.drillName
+      );
+      await setDoc(d, {
+        approaches: drill.approaches,
+        repeat: drill.repeat,
+        rest: drill.rest,
       });
     });
-  }
+  });
+};
 
-  static getEx(id) {
-    return new Promise((resolve, reject) => {
-      db.transaction((tx) => {
-        tx.executeSql(
-          "select * from ex where clientID = ?",
-          [id],
-          (_, result) => resolve(result.rows._array),
-          (_, error) => reject(error)
-        );
-      });
-    });
-  }
+const loadDrills = async (dayRef, day) => {
+  let drillDay = {
+    day,
+    drills: [],
+  };
 
-  static getClients() {
-    return new Promise((resolve, reject) => {
-      db.transaction((tx) => {
-        tx.executeSql(
-          "select * from clients",
-          [],
-          (_, result) => resolve(result.rows._array),
-          (_, error) => reject(error)
-        );
-      });
+  const daySnapShot = await getDocs(dayRef);
+  const foo = async () => {
+    daySnapShot.forEach((drill) => {
+      drillDay = {
+        ...drillDay,
+        drills: [
+          ...drillDay.drills,
+          {
+            title: drill.id,
+            rest: drill.data().rest,
+            repeat: drill.data().repeat,
+            approaches: drill.data().approaches,
+          },
+        ],
+      };
     });
-  }
-  static createClient({ name, surname, data, height, weight ,phone }) {
-    return new Promise((resolve, reject) => {
-      db.transaction((tx) => {
-        tx.executeSql(
-          "insert into clients (name, surname, data, phone, height, weight) values (?, ?, ?, ?, ?, ?)",
-          [name, surname, data, phone, height, weight],
-          (_, result) => resolve(result.insertId),
-          (_, error) => reject(error)
-        );
-      });
-    });
-  }
+  };
+  await foo();
+  return drillDay;
+};
 
-  static createEx({ name, clientID, weight, approaches, repetitions, rest }) {
-    return new Promise((resolve, reject) => {
-      db.transaction((tx) => {
-        tx.executeSql(
-          "insert into ex (name, weight, approaches, repetitions, rest, clientID) values (?, ?, ?, ?, ?, ?)",
-          [name, weight, approaches, repetitions, rest, clientID],
-          (_, result) => resolve(result.insertId),
-          (_, error) => reject(error)
-        );
-      });
-    });
+const loadDays = async (doc) => {
+  let plan = {
+    title: doc.title,
+    discription: doc.discription,
+    days: [],
+  };
+  for (const day of week) {
+    const dayRef = collection(
+      db,
+      "users",
+      auth.currentUser.uid,
+      "plans",
+      doc.id,
+      day
+    );
+    const drillDay = await loadDrills(dayRef, day);
+    plan = { ...plan, days: [...plan.days, drillDay] };
   }
+  return plan;
+};
 
-  static delete() {
-    return new Promise((resolve, reject) => {
-      db.transaction((tx) => {
-        tx.executeSql("drop table clients", [], resolve(), (_, error) =>
-          reject(error)
-        );
-      });
-      db.transaction((tx) => {
-        tx.executeSql("drop table ex", [], resolve(), (_, error) =>
-          reject(error)
-        );
+export const loadPlans = async () => {
+  let allPlans = [];
+  let tmp = [];
+  const allPLanRef = collection(db, "users", auth.currentUser.uid, "plans");
+  const querySnapshot = await getDocs(allPLanRef);
+  const foo = async () => {
+    querySnapshot.forEach((doc) => {
+      tmp.push({
+        id: doc.id,
+        title: doc.data().title,
+        discription: doc.data().discription,
       });
     });
+  };
+  await foo();
+  for (const i of tmp) {
+    const plan = await loadDays(i);
+    allPlans = [...allPlans, plan];
   }
-}
+  return allPlans;
+};
+
+export const getClients = async () => {
+  let allClients = [];
+  const q = query(
+    collection(db, "users"),
+    where("coach", "==", auth.currentUser.uid)
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    allClients = [...allClients, { id: doc.id, clientData: doc.data() }];
+  });
+  return allClients
+};

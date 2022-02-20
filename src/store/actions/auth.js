@@ -1,15 +1,10 @@
-import {
-  logup,
-  logout,
-  login,
-  auth,
-  setUserData,
-  getSelfInfo,
-  getUserData,
-} from "../../firebase";
+import { logup, logout, login, auth } from "../../firebase";
+
+import { setUserData, getUserData } from "../../db";
 
 export const signIn = (username, password) => async (dispatch) => {
-  await login(username, password);
+  // await login(username, password);
+  await login('test@test.com', "password");
   // const user = await getUserData();
   dispatch({
     type: "SIGN_IN",
@@ -24,6 +19,7 @@ export const signUp = (selfInfo) => async (dispatch) => {
   dispatch({
     type: "SIGN_UP",
     token: "token",
+    isCoach: selfInfo.isCoach
   });
 };
 
@@ -51,5 +47,6 @@ export const loadUserData = () => async (dispatch) => {
   dispatch({
     type: "loadUserData",
     user: user,
+    isCoach: user.isCoach
   });
 };

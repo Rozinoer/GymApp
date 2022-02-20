@@ -1,31 +1,62 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Button,
+  ActivityIndicator,
+} from "react-native";
 import { BottomNavbar } from "../components/BottomNavbar";
-import { THEME } from "../theme";
 import { TrainingPlan } from "../components/TrainingPlan";
 import { ScrollView } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { ProfileText } from "../components/ProfileText";
+import { loadPlan } from "../store/actions/drillPlan";
 
 export const ExBase = ({ navigation }) => {
-  const [search, setSearch] = useState("");
-
+  const plans = useSelector((state) => state.drillPlan.allPlan);
+  const isLoaded = useSelector((state) => state.drillPlan.isPlanLoaded);
+  
+  const dispatch = useDispatch()
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button title="New plan" onPress={() => navigation.navigate("AddNewPlan")} />
+        <Button
+          title="New plan"
+          onPress={() => navigation.navigate("AddNewPlan")}
+        />
       ),
     });
-  }, []);
-
+    dispatch(loadPlan());
+  }, [dispatch]);
   return (
-    <View style={styles.profile}>
-      <ScrollView style={styles.scrollView}>
-        <TrainingPlan />
-        <TrainingPlan />
-      </ScrollView>
-      <View>
-        <BottomNavbar navigation={navigation} />
-      </View>
-    </View>
+    <>
+      {isLoaded ? (
+        <View style={styles.profile}>
+          <ScrollView style={styles.scrollView}>
+          {plans.map((plan) => {
+          return (
+            <>
+            <TrainingPlan plan={plan} />
+            <TrainingPlan plan={plan} />
+            <TrainingPlan plan={plan} />
+            <TrainingPlan plan={plan} />
+            </>
+          );
+        })}
+          </ScrollView>
+          <View>
+            <BottomNavbar navigation={navigation} />
+          </View>
+        </View>
+      ) : (
+        <>
+          <View style={styles.activityIndecator}>
+            <ActivityIndicator size={"large"} />
+            <ProfileText value={"Loading..."} />
+          </View>
+        </>
+      )}
+    </>
   );
 };
 
@@ -34,4 +65,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {},
+  activityIndecator: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    backgroundColor: "black",
+    width: "100%",
+  },
 });

@@ -23,7 +23,7 @@ export const AddNewPlan = ({navigation}) => {
   const dispatch = useDispatch();
 
   const savePlan= () => {
-    dispatch(addPlan({planToSave, planTitle, planDisc}))
+    dispatch(addPlan(planToSave, planTitle, planDisc))
   }
 
   const planToSave = useSelector((state) => state.drillPlan.planToSave);
