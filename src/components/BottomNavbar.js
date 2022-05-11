@@ -45,7 +45,7 @@ export const BottomNavbar = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Clients")}
+        onPress={() => navigation.navigate("ChatScreen")}
       >
         <AntDesign name="wechat" size={24} color={"black"} />
       </TouchableOpacity>

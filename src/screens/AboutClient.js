@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useCallback } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  Linking,
-  TouchableOpacity,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { BottomNavbar } from "../components/BottomNavbar";
 import { ProfileText } from "../components/ProfileText";
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryTheme,
+  VictoryLine,
+} from "victory-native";
+import { ScrollView } from "react-native-gesture-handler";
+
+const data = [
+  { quarter: 1, earnings: 70.0 },
+  { quarter: 2, earnings: 70.4 },
+  { quarter: 3, earnings: 71.1 },
+  { quarter: 4, earnings: 71.5 },
+];
 
 export const AboutClient = ({ route, navigation }) => {
   const { client } = route.params;
@@ -31,20 +37,20 @@ export const AboutClient = ({ route, navigation }) => {
         <View style={styles.info}>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
             <ProfileText value={state.name + " " + state.surname} flag="1" />
-            <ProfileText value={state.city + ", " + state.country} />
+            <ProfileText value={"Moscow" + ", " + "Russia"} />
           </View>
           <View style={styles.clientInfo}>
             <View style={styles.statistics}>
-              <ProfileText value="5 753" flag="1" />
-              <ProfileText value="followers" />
+              <ProfileText value="186" flag="1" />
+              <ProfileText value="height" />
             </View>
             <View style={styles.statistics}>
-              <ProfileText value="5 753" flag="1" />
-              <ProfileText value="followers" />
+              <ProfileText value="72" flag="1" />
+              <ProfileText value="weight" />
             </View>
             <View style={styles.statistics}>
-              <ProfileText value="5 753" flag="1" />
-              <ProfileText value="followers" />
+              <ProfileText value="21" flag="1" />
+              <ProfileText value="age" />
             </View>
           </View>
           <View
@@ -64,22 +70,72 @@ export const AboutClient = ({ route, navigation }) => {
             >
               <ProfileText value={state.aboutTraining} />
             </Text>
-            {/* <TouchableOpacity onPress={handlePress}>
-              <ProfileText value={state.network} />
-            </TouchableOpacity> */}
-            {/* <ProfileText value={user.phone} /> */}
           </View>
-          <View style={{flexDirection:"row", justifyContent:'space-between', width: "70%"}}>
+          <View
+            style={{
+              // flexDirection: "row",
+              justifyContent: "space-between",
+              width: "70%",
+              alignContent: "center",
+            }}
+          >
             <TouchableOpacity style={styles.btn}>
               <ProfileText value="Назначить тренировку" />
             </TouchableOpacity>
+            <View style={{ flexDirection: "row" }}>
+              <TouchableOpacity style={styles.btn}>
+                <ProfileText value="Тренировочный план" />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn}>
+                <ProfileText value=" Рацион  " />
+              </TouchableOpacity>
+            </View>
             <TouchableOpacity style={styles.btn}>
               <ProfileText value="Написать" />
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.commonInfo}>
-          {/* <Text>Profile screen</Text> */}
+          <ScrollView>
+            <VictoryChart
+              width={350}
+              height={200}
+              theme={VictoryTheme.material}
+            >
+              <VictoryLine
+                style={{
+                  data: { stroke: "#c43a31" },
+                  parent: { border: "1px solid #ccc" },
+                }}
+                data={[
+                  { x: "Jan", y: 68 },
+                  { x: "Feb", y: 69.7 },
+                  { x: "Mar", y: 70.3 },
+                  { x: "Apr", y: 70.3 },
+                  { x: "May", y: 72 },
+                ]}
+              />
+            </VictoryChart>
+            <VictoryChart
+              width={350}
+              height={200}
+              theme={VictoryTheme.material}
+            >
+              <VictoryLine
+                style={{
+                  data: { stroke: "#c43a31" },
+                  parent: { border: "1px solid #ccc" },
+                }}
+                data={[
+                  { x: "Jan", y: 68 },
+                  { x: "Feb", y: 69.7 },
+                  { x: "Mar", y: 70.3 },
+                  { x: "Apr", y: 70.3 },
+                  { x: "May", y: 72 },
+                ]}
+              />
+            </VictoryChart>
+          </ScrollView>
         </View>
       </View>
       <View style={styles.navbar}>
@@ -113,6 +169,7 @@ const styles = StyleSheet.create({
     height: 400,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 30
   },
   clientInfo: {
     marginTop: 30,
@@ -128,9 +185,17 @@ const styles = StyleSheet.create({
   commonInfo: {
     backgroundColor: "white",
     flex: 1,
+    alignItems: "center",
   },
   navbar: {
     width: "100%",
   },
-  btn: {padding:10,borderWidth: 1, borderColor:'white', borderRadius: 10}
+  btn: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 10,
+    margin: 5,
+    alignItems:'center'
+  },
 });

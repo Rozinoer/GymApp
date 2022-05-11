@@ -35,11 +35,16 @@ export const ClientsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        {allClients.map((client) => {
+        {/* {allClients.map((client) => {
           return (
             <Client key={client.id} client={client.clientData} navigation={navigation} />
           );
-        })}
+        })} */}
+        <Client key={"01"} client={{name: "Иван", surname: "Сидоров"}} navigation={navigation} />
+        <Client key={"02"} client={{name: "Константин", surname: "Зыков"}} navigation={navigation} />
+        <Client key={"03"} client={{name: "Петр", surname: "Коваленко"}} navigation={navigation} />
+        <Client key={"04"} client={{name: "Дарья", surname: "Блумкина"}} navigation={navigation} />
+        <Client key={"05"} client={{name: "Мария", surname: "Иванова"}} navigation={navigation} />
       </ScrollView>
       <BottomNavbar navigation={navigation} />
     </View>

@@ -2,21 +2,16 @@ import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ClientsScreen } from "./screens/ClientsScreen";
-import { AddNewClient } from "./screens/AddNewClient";
 import { AboutClient } from "./screens/AboutClient";
-import { ClientProgress } from "./screens/ClientProgress";
-import { ClientEx } from "./screens/ClientEx";
-import { AddNewEx } from "./screens/AddNewEx";
 import { AddNewPlan } from "./screens/AddNewPlan";
 import { ProfileScreen } from "./screens/ProfileScreen";
 import { SignInScreen } from "./screens/EnterScreens/SignInScreen";
 import { SignUpScreen } from "./screens/EnterScreens/SignUpScreen";
 import { ExBase } from "./screens/ExBase";
-import { Button, Text } from "react-native";
 import { THEME } from "./theme";
 import { useSelector } from "react-redux";
 import { AddNewDay } from "./screens/AddNewDay";
-
+import { ChatScreen } from "./screens/ChatScreen";
 export const MainLayout = () => {
   const Stack = createNativeStackNavigator();
 
@@ -58,9 +53,24 @@ export const MainLayout = () => {
                 },
               }}
             />
+
+            <Stack.Screen name="ChatScreen" component={ChatScreen} />
             <Stack.Screen name="AddNewPlan" component={AddNewPlan} />
             <Stack.Screen name="AddNewDay" component={AddNewDay} />
-            <Stack.Screen name="Info" component={AboutClient} />
+            <Stack.Screen
+              name="Info"
+              component={AboutClient}
+              options={{
+                title: "Training plans",
+                headerShadowVisible: false,
+                headerStyle: {
+                  backgroundColor: "black",
+                },
+                headerTitleStyle: {
+                  color: "white",
+                },
+              }}
+            />
             <Stack.Screen
               name="ExBase"
               component={ExBase}

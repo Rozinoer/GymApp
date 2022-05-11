@@ -36,9 +36,9 @@ export const TrainingPlan = ({ navigation, plan }) => {
                           <View style={{ marginVertical: 20 }}>
                             <Text style={{fontSize:20}}>{drill.title}</Text>
                             <View style={{flexDirection:'row', justifyContent:'space-around'}}>
-                              <Text>Подходы {drill.approaches}</Text>
-                              <Text>Повторения {drill.repeat}</Text>
-                              <Text>Отдых {drill.rest}</Text>
+                              <Text>Подходы: {drill.approaches}</Text>
+                              <Text>Повторения: {drill.repeat}</Text>
+                              <Text>Отдых: {drill.rest} сек</Text>
                             </View>
                           </View>
                         );

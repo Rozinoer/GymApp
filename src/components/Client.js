@@ -9,7 +9,9 @@ export const Client = ({ client, navigation }) => {
       onPress={() => navigation.navigate("Info", { client: client })}
     >
       <View style={styles.infoBlock}>
-        <View style={styles.avatar} />
+        <View style={styles.avatar} >
+          <Text style={{fontSize: 35}}>{client.surname[0]}{client.name[0]}</Text>
+        </View>
         <View style={styles.name}>
           <Text style={styles.text}>
             {client.surname} {client.name}
@@ -46,6 +48,9 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: "#ebebeb",
     borderRadius: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey',
   },
 
   text: {
