@@ -3,6 +3,7 @@ import { StyleSheet, View, Button, ScrollView, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { loadClients } from "../store/actions/client";
 import { BottomNavbar } from "../components/BottomNavbar";
+import { THEME } from "../theme";
 
 const Chat = ({ name, lastname, message }) => {
   return (
@@ -48,22 +49,10 @@ export const ChatScreen = ({ navigation }) => {
           );
         })} */}
         <Chat key={"01"} name={"Иван"} lastname={"Сидоров"} message={"hello"} />
-        <Chat
-          key={"02"}
-          name={"Иван"} lastname={"Сидоров"} message={"hello"}
-        />
-        <Chat
-          key={"03"}
-          name={"Иван"} lastname={"Сидоров"} message={"hello"}
-        />
-        <Chat
-          key={"04"}
-          name={"Иван"} lastname={"Сидоров"} message={"hello"} 
-        />
-        <Chat
-          key={"05"}
-          name={"Иван"} lastname={"Сидоров"} message={"hello"}
-        />
+        <Chat key={"02"} name={"Иван"} lastname={"Сидоров"} message={"hello"} />
+        <Chat key={"03"} name={"Иван"} lastname={"Сидоров"} message={"hello"} />
+        <Chat key={"04"} name={"Иван"} lastname={"Сидоров"} message={"hello"} />
+        <Chat key={"05"} name={"Иван"} lastname={"Сидоров"} message={"hello"} />
       </ScrollView>
       <BottomNavbar navigation={navigation} />
     </View>
@@ -79,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   containerStyle: {
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
     justifyContent: "center",
     alignItems: "center",
     height: 40,
@@ -91,7 +80,7 @@ const styles = StyleSheet.create({
   },
   client: {
     height: 70,
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
     width: "100%",
   },
   infoBlock: {
@@ -99,13 +88,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor:'black',
-    height:70
+    backgroundColor: THEME.BACKGROUND,
+    height: 70,
   },
   name: {
     borderBottomWidth: 0.2,
     borderTopWidth: 0.2,
-    borderColor: "white",
+    borderColor: THEME.PARAGRAPH,
     height: "100%",
     flex: 1,
     justifyContent: "center",
@@ -114,15 +103,14 @@ const styles = StyleSheet.create({
   avatar: {
     width: 60,
     height: 60,
-    backgroundColor: "#ebebeb",
+    backgroundColor: THEME.PARAGRAPH,
     borderRadius: 45,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "grey",
   },
 
   text: {
     fontSize: 32,
-    color: "white",
+    color: THEME.HEADLINE_TEXT,
   },
 });

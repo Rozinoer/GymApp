@@ -61,7 +61,7 @@ export const MainLayout = () => {
               name="Info"
               component={AboutClient}
               options={{
-                title: "Training plans",
+                title: "",
                 headerShadowVisible: false,
                 headerStyle: {
                   backgroundColor: "black",

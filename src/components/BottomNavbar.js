@@ -1,15 +1,14 @@
 import React from "react";
 import {
   StyleSheet,
-  Text,
   View,
   TouchableOpacity,
-  Dimensions,
 } from "react-native";
-import { THEME } from "../theme";
 import { AntDesign, Ionicons, FontAwesome5 } from "@expo/vector-icons";
-import { loadPlans } from "../db";
 import { useSelector } from "react-redux";
+
+import { THEME } from "../theme";
+import { loadPlans } from "../db";
 
 export const BottomNavbar = ({ navigation }) => {
   const isCoach = useSelector((state) => state.auth.isCoach);
@@ -57,8 +56,8 @@ const styles = StyleSheet.create({
   navbar: {
     height: 90,
     flexDirection: "row",
-    justifyContent: 'space-around',
-    alignItems:'center',
+    justifyContent: "space-around",
+    alignItems: "center",
     backgroundColor: THEME.SILVER,
   },
   text: {

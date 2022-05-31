@@ -9,7 +9,7 @@ export const TrainingDay = () => {
   const [day, setDay] = useState("");
 
   useEffect(() => {
-    setEx((prev) => [...prev, <DrillInfo key={Date.now()}/>]);
+    setEx((prev) => [...prev, <DrillInfo key={Date.now()} />]);
   }, [amountEx]);
   return (
     <View style={styles.container}>

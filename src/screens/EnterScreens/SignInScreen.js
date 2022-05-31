@@ -7,9 +7,9 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { signIn, signUp } from "../../store/actions/auth";
-import { ProfileText } from "../../components/ProfileText";
+import { useDispatch } from "react-redux";
+import { signIn } from "../../store/actions/auth";
+import { THEME } from "../../theme";
 
 export const SignInScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -21,10 +21,18 @@ export const SignInScreen = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-      <Text style={{ color: "red", fontSize: 44 }}>GYM APP </Text>
+      <Text
+        style={{
+          color: THEME.HEADLINE_TEXT,
+          fontSize: 44,
+          fontFamily: "Montserrat",
+        }}
+      >
+        RuFit+
+      </Text>
       <TextInput
         placeholder="Username"
-        placeholderTextColor={"white"}
+        placeholderTextColor={THEME.PARAGRAPH}
         autoCapitalize={"none"}
         onChangeText={(text) => {
           setUsername(text);
@@ -34,7 +42,7 @@ export const SignInScreen = ({ navigation }) => {
       ></TextInput>
       <TextInput
         placeholder="Password"
-        placeholderTextColor={"white"}
+        placeholderTextColor={THEME.PARAGRAPH}
         autoCapitalize={"none"}
         secureTextEntry={true}
         onChangeText={(text) => {
@@ -44,10 +52,12 @@ export const SignInScreen = ({ navigation }) => {
         style={styles.textInput}
       ></TextInput>
       <View style={styles.button}>
-        <Button color="white" title="Sign in" onPress={login}></Button>
+        <Button color={"white"} title="Sign in" onPress={login}></Button>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
-        <ProfileText value={"Don`t have an account? Create here"} />
+        <Text style={styles.clientInfoTextDisc}>
+          Don`t have an account? Create here
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -56,22 +66,27 @@ export const SignInScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
     justifyContent: "center",
     alignItems: "center",
   },
+  clientInfoTextDisc: {
+    color: THEME.HEADLINE_TEXT,
+    fontSize: 12,
+    fontFamily: "Montserrat",
+  },
   textInput: {
-    borderWidth: 0.2,
-    borderColor: "white",
+    borderBottomWidth: 0.2,
+    borderColor: THEME.PARAGRAPH,
     height: 50,
     width: 300,
-    fontSize: 12,
-    borderRadius: 30,
-    color: "white",
+    fontSize: 16,
+    color: THEME.HEADLINE_TEXT,
     marginTop: 5,
+    paddingTop: 20,
   },
   button: {
-    backgroundColor: "grey",
+    backgroundColor: THEME.BUTTON,
     width: 200,
     borderWidth: 1,
     borderRadius: 30,

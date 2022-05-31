@@ -9,8 +9,11 @@ export const Client = ({ client, navigation }) => {
       onPress={() => navigation.navigate("Info", { client: client })}
     >
       <View style={styles.infoBlock}>
-        <View style={styles.avatar} >
-          <Text style={{fontSize: 35}}>{client.surname[0]}{client.name[0]}</Text>
+        <View style={styles.avatar}>
+          <Text style={{ fontSize: 35 }}>
+            {client.surname[0]}
+            {client.name[0]}
+          </Text>
         </View>
         <View style={styles.name}>
           <Text style={styles.text}>
@@ -25,7 +28,7 @@ export const Client = ({ client, navigation }) => {
 const styles = StyleSheet.create({
   client: {
     height: 70,
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
     width: "100%",
   },
   infoBlock: {
@@ -37,7 +40,7 @@ const styles = StyleSheet.create({
   name: {
     borderBottomWidth: 0.2,
     borderTopWidth: 0.2,
-    borderColor: "white",
+    borderColor: THEME.PARAGRAPH,
     height: "100%",
     flex: 1,
     justifyContent: "center",
@@ -46,15 +49,14 @@ const styles = StyleSheet.create({
   avatar: {
     width: 60,
     height: 60,
-    backgroundColor: "#ebebeb",
     borderRadius: 45,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'grey',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "grey",
   },
 
   text: {
     fontSize: 32,
-    color: "white",
+    color: THEME.HEADLINE_TEXT,
   },
 });

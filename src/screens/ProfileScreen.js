@@ -1,5 +1,4 @@
-import { Link } from "@react-navigation/native";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -13,7 +12,8 @@ import { BottomNavbar } from "../components/BottomNavbar";
 import { ProfileText } from "../components/ProfileText";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut, loadUserData } from "../store/actions/auth";
-import { loadPlan } from "../store/actions/drillPlan";
+import { THEME } from "../theme";
+import { Event } from "../components/Event";
 
 export const ProfileScreen = ({ navigation }) => {
   const user = useSelector((state) => state.auth.user);
@@ -98,7 +98,33 @@ export const ProfileScreen = ({ navigation }) => {
                 </View>
               </View>
               <View style={styles.commonInfo}>
-                {/* <Text>Profile screen</Text> */}
+                <Event
+                  date={31}
+                  month={"May"}
+                  user={"Дарья Блумкина"}
+                  type={"Йога"}
+                  time={5}
+                  event={"Тренировка"}
+                  duration={1}
+                />
+                <Event
+                  date={1}
+                  month={"June"}
+                  user={"Иван Сидоров"}
+                  type={"Силовая тренировка"}
+                  time={2}
+                  event={"Тренировка"}
+                  duration={1.5}
+                />
+                <Event
+                  date={1}
+                  month={"June"}
+                  user={"Петр Коваленко"}
+                  type={"Силовая тренировка"}
+                  time={4}
+                  event={"Тренировка"}
+                  duration={1.5}
+                />
               </View>
             </View>
             <View style={styles.navbar}>
@@ -129,17 +155,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
     width: "100%",
   },
   wrapper: {
     flex: 1,
     width: "100%",
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
   },
   info: {
     width: "100%",
-    height: 400,
+    height: 350,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -159,6 +185,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   navbar: {
-    width: '100%'
+    width: "100%",
   },
 });

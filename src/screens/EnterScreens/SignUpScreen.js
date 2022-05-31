@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { ProfileText } from "../../components/ProfileText";
 import { signUp } from "../../store/actions/auth";
 import { useDispatch } from "react-redux";
+import { THEME } from "../../theme";
 
 const DATA = [
   {
@@ -60,12 +61,11 @@ const DATA = [
 ];
 
 export const SignUpScreen = ({ navigation }) => {
-
   const dispatch = useDispatch();
   const logup = () => {
     dispatch(signUp(selfInfo));
   };
-  const [isEnabled, setIsEnabled] = useState('false');
+  const [isEnabled, setIsEnabled] = useState("false");
   let selfInfo = {
     name: "",
     surname: "",
@@ -88,7 +88,7 @@ export const SignUpScreen = ({ navigation }) => {
         style={styles.input}
         placeholder={placeholder}
         onChangeText={(text) => {
-          if (title === "Name")  selfInfo.name = text;
+          if (title === "Name") selfInfo.name = text;
           if (title === "Surname") selfInfo.surname = text;
           if (title === "Email") selfInfo.email = text;
           if (title === "Password") selfInfo.password = text;
@@ -147,7 +147,7 @@ export const SignUpScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
   },
   scroll: {
     flex: 1,
@@ -159,27 +159,27 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 1,
-    borderColor: "white",
+    borderColor: THEME.PARAGRAPH,
     fontSize: 20,
     fontFamily: "Montserrat",
-    color: "white",
+    color: THEME.HEADLINE_TEXT,
   },
   title: {
     fontSize: 32,
-    color: "white",
+    color: THEME.HEADLINE_TEXT,
     marginBottom: 15,
     fontFamily: "Montserrat",
   },
   switchText: {
     fontSize: 12,
-    color: "white",
+    color: THEME.HEADLINE_TEXT,
     fontFamily: "Montserrat",
   },
   btn: {
     marginBottom: 50,
     marginTop: 50,
     borderWidth: 1,
-    borderColor: "white",
+    borderColor: THEME.HEADLINE_TEXT,
     height: 50,
     width: "70%",
     justifyContent: "center",

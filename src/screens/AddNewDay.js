@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addDay } from "../store/actions/drillPlan";
+import { THEME } from "../theme";
 
 export const AddNewDay = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -42,7 +43,7 @@ export const AddNewDay = ({ navigation }) => {
       <TextInput
         style={styles.TextInput}
         placeholder="День недели"
-        placeholderTextColor={"white"}
+        placeholderTextColor={THEME.HEADLINE_TEXT}
         onChangeText={(text) => setTitle(text)}
       ></TextInput>
       <ScrollView>
@@ -108,13 +109,13 @@ export const AddNewDay = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
   },
   TextInput: {
-    color: "white",
+    color: THEME.HEADLINE_TEXT,
     fontFamily: "Montserrat",
     fontSize: 25,
-    borderBottomColor: "white",
+    borderBottomColor: THEME.PARAGRAPH,
     borderWidth: 0.2,
   },
   centeredView: {
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: THEME.BACKGROUND,
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -140,11 +141,11 @@ const styles = StyleSheet.create({
   },
   drill: {
     width: "100%",
-    borderBottomColor: "white",
+    borderBottomColor: THEME.PARAGRAPH,
     borderBottomWidth: 0.2,
     marginVertical: 20,
   },
   text: {
-    color: "white",
+    color: THEME.HEADLINE_TEXT,
   },
 });

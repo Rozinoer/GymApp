@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import {
   Button,
-  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   Modal,
 } from "react-native";
-import { AntDesign, Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import {THEME} from '../theme'
 
-export const TrainingPlan = ({ navigation, plan }) => {
+export const TrainingPlan = ({ plan }) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
@@ -34,8 +34,13 @@ export const TrainingPlan = ({ navigation, plan }) => {
                       {day.drills.map((drill) => {
                         return (
                           <View style={{ marginVertical: 20 }}>
-                            <Text style={{fontSize:20}}>{drill.title}</Text>
-                            <View style={{flexDirection:'row', justifyContent:'space-around'}}>
+                            <Text style={{ fontSize: 20 }}>{drill.title}</Text>
+                            <View
+                              style={{
+                                flexDirection: "row",
+                                justifyContent: "space-around",
+                              }}
+                            >
                               <Text>Подходы: {drill.approaches}</Text>
                               <Text>Повторения: {drill.repeat}</Text>
                               <Text>Отдых: {drill.rest} сек</Text>
@@ -60,17 +65,17 @@ export const TrainingPlan = ({ navigation, plan }) => {
         onPress={() => setModalVisible(!modalVisible)}
       >
         <View style={{ justifyContent: "space-between" }}>
-          <Text style={{ color: "white", fontSize: 20 }}>{plan.title}</Text>
-          <Text style={{ color: "white" }}>{plan.discription}</Text>
+          <Text style={{ color: THEME.HEADLINE_TEXT, fontSize: 20 }}>{plan.title}</Text>
+          <Text style={{ color: THEME.HEADLINE_TEXT }}>{plan.discription}</Text>
           <View style={{ flexDirection: "row", marginBottom: 10 }}>
-            <AntDesign name="user" size={24} color="white" />
-            <Text style={{ color: "white" }}>5</Text>
+            <AntDesign name="user" size={24} color={THEME.HEADLINE_TEXT} />
+            <Text style={{ color: THEME.HEADLINE_TEXT }}>5</Text>
           </View>
         </View>
         <View style={styles.drills}>
           {plan.days.map((day) => {
             if (day.drills.length !== 0)
-              return <Text style={{ color: "white" }}>{day.day}</Text>;
+              return <Text style={{ color: THEME.HEADLINE_TEXT }}>{day.day}</Text>;
           })}
         </View>
       </TouchableOpacity>
@@ -81,10 +86,10 @@ export const TrainingPlan = ({ navigation, plan }) => {
 const styles = StyleSheet.create({
   plan: {
     height: 200,
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
     borderTopWidth: 0.1,
     borderBottomWidth: 0.2,
-    borderColor: "white",
+    borderColor: THEME.HEADLINE_TEXT,
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 5,
@@ -93,7 +98,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   text: {
-    color: "white",
+    color: THEME.HEADLINE_TEXT,
   },
   centeredView: {
     flex: 1,
@@ -102,12 +107,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22,
   },
-  drillInfo: {
-    
-  },
+  drillInfo: {},
   modalView: {
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: THEME.BACKGROUND,
     borderRadius: 20,
     padding: 15,
     alignItems: "center",

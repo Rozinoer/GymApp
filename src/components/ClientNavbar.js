@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { THEME } from "../theme";
+
 export const ClientNavbar = ({ client, navigation }) => {
   return (
     <View style={styles.navbar}>
@@ -21,11 +22,11 @@ const styles = StyleSheet.create({
     height: 60,
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
     flexDirection: "row",
   },
   text: {
-    color: "white",
+    color: THEME.BUTTON_TEXT,
     fontSize: 24,
     paddingBottom: 5,
   },

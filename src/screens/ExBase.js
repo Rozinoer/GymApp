@@ -11,6 +11,7 @@ import { ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { ProfileText } from "../components/ProfileText";
 import { loadPlan } from "../store/actions/drillPlan";
+import { THEME } from "../theme";
 
 export const ExBase = ({ navigation }) => {
   const plans = useSelector((state) => state.drillPlan.allPlan);
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
     width: "100%",
   },
 });

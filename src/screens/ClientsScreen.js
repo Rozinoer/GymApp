@@ -11,9 +11,7 @@ import { Client } from "../components/Client";
 import { useDispatch, useSelector } from "react-redux";
 import { loadClients } from "../store/actions/client";
 import { THEME } from "../theme";
-import { SearchBarIosProps } from "react-native-elements";
 import { BottomNavbar } from "../components/BottomNavbar";
-import SearchBar from "react-native-elements/dist/searchbar/SearchBar-ios";
 
 export const ClientsScreen = ({ navigation }) => {
   const [search, setSearch] = useState("");
@@ -60,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   containerStyle: {
-    backgroundColor: "black",
+    backgroundColor: THEME.BACKGROUND,
     justifyContent: "center",
     alignItems: "center",
     height: 40,

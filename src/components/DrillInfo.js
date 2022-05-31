@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
-import React, {useState} from "react";
+import React, { useState } from "react";
+import {THEME} from '../theme'
 
 export const DrillInfo = () => {
   const [drill, setDrill] = useState({
@@ -9,7 +10,7 @@ export const DrillInfo = () => {
     rest: 0,
     discription: "",
   });
-  const [drillTitle, setDrillTitle] = useState('')
+  const [drillTitle, setDrillTitle] = useState("");
   const updateTitle = (text) => {
     setDrill((prev) => {
       return {
@@ -58,7 +59,7 @@ export const DrillInfo = () => {
     <View key={Date.now()}>
       <View>
         <TextInput
-          placeholderTextColor={"white"}
+          placeholderTextColor={THEME.HEADLINE_TEXT}
           style={styles.textInput}
           onChangeText={(text) => updateTitle(text)}
           placeholder="Упражнение"
@@ -67,27 +68,27 @@ export const DrillInfo = () => {
       </View>
       <View style={styles.wrapper}>
         <TextInput
-          style={{ color: "white" }}
+          style={{ color: THEME.HEADLINE_TEXT }}
           placeholder="Подходы"
-          placeholderTextColor={"white"}
+          placeholderTextColor={THEME.HEADLINE_TEXT}
           onChangeText={(text) => updateApproach(text)}
         />
         <TextInput
-          style={{ color: "white" }}
+          style={{ color: THEME.HEADLINE_TEXT }}
           placeholder="Повторения"
-          placeholderTextColor={"white"}
+          placeholderTextColor={THEME.HEADLINE_TEXT}
           onChangeText={(text) => updateRepeat(text)}
         />
         <TextInput
-          style={{ color: "white" }}
+          style={{ color: THEME.HEADLINE_TEXT }}
           placeholder="Отдых"
-          placeholderTextColor={"white"}
+          placeholderTextColor={THEME.HEADLINE_TEXT}
           onChangeText={(text) => updateRest(text)}
         />
       </View>
       <TextInput
         multiline={true}
-        placeholderTextColor={"white"}
+        placeholderTextColor={THEME.HEADLINE_TEXT}
         placeholder="Краткое описание"
         style={styles.textInput}
         onChangeText={(text) => updateDiscription(text)}
@@ -99,8 +100,8 @@ export const DrillInfo = () => {
 const styles = StyleSheet.create({
   textInput: {
     borderBottomWidth: 0.5,
-    borderColor: "white",
-    color: "white",
+    borderColor: THEME.HEADLINE_TEXT,
+    color: THEME.HEADLINE_TEXT,
     fontFamily: "Montserrat",
     fontSize: 20,
     justifyContent: "center",
@@ -115,6 +116,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingBottom: 10,
     borderBottomWidth: 0.4,
-    borderColor: "white",
+    borderColor: THEME.HEADLINE_TEXT,
   },
 });
