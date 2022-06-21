@@ -1,12 +1,12 @@
 import React from "react";
-import { Button, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { THEME } from "../theme";
 
 export const Client = ({ client, navigation }) => {
   return (
     <Pressable
       style={styles.client}
-      onPress={() => navigation.navigate("Info", { client: client })}
+      onPress={() => navigation.navigate("Info", { client })}
     >
       <View style={styles.infoBlock}>
         <View style={styles.avatar}>

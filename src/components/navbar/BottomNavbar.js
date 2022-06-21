@@ -1,14 +1,11 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { AntDesign, Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
-import { THEME } from "../theme";
-import { loadPlans } from "../db";
+import { THEME } from "../../theme";
+import { loadPlans } from "../../db";
+import { styles } from "./styles";
 
 export const BottomNavbar = ({ navigation }) => {
   const isCoach = useSelector((state) => state.auth.isCoach);
@@ -19,59 +16,35 @@ export const BottomNavbar = ({ navigation }) => {
           style={styles.button}
           onPress={() => navigation.navigate("Clients")}
         >
-          <Ionicons name="people" size={24} color={"black"} />
+          <Ionicons name="people" size={24} color={THEME.BACKGROUND} />
         </TouchableOpacity>
       ) : null}
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("ExBase")}
       >
-        <FontAwesome5 name="dumbbell" size={24} color={"black"} />
+        <FontAwesome5 name="dumbbell" size={24} color={THEME.BACKGROUND} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Profile")}
       >
-        <Ionicons name="home" size={36} color={"black"} />
+        <Ionicons name="home" size={36} color={THEME.BACKGROUND} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={async () => {
-          const plan = await loadPlans();
+          await loadPlans();
         }}
       >
-        <FontAwesome5 name="carrot" size={24} color={"black"} />
+        <FontAwesome5 name="carrot" size={24} color={THEME.BACKGROUND} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("ChatScreen")}
       >
-        <AntDesign name="wechat" size={24} color={"black"} />
+        <AntDesign name="wechat" size={24} color={THEME.BACKGROUND} />
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  navbar: {
-    height: 90,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    backgroundColor: THEME.SILVER,
-  },
-  text: {
-    color: "white",
-    fontSize: 24,
-    paddingBottom: 5,
-  },
-  button: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: "white",
-  },
-  icon: {},
-});

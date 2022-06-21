@@ -5,10 +5,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Modal,
-  Alert,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { THEME } from "../theme";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { useSelector, useDispatch } from "react-redux";
@@ -30,7 +28,7 @@ export const AddNewPlan = ({ navigation }) => {
       <TextInput
         style={styles.textInput}
         placeholderTextColor={THEME.PARAGRAPH}
-        placeholder="Plan title"
+        placeholder="Название"
         value={planTitle}
         onChangeText={(text) => setPlanTitle(text)}
       ></TextInput>
@@ -38,7 +36,7 @@ export const AddNewPlan = ({ navigation }) => {
         style={styles.textInput}
         multiline={true}
         placeholderTextColor={THEME.PARAGRAPH}
-        placeholder="Discription"
+        placeholder="Описание"
         value={planDisc}
         onChangeText={(text) => setPlanDisc(text)}
       ></TextInput>
@@ -75,8 +73,9 @@ const styles = StyleSheet.create({
     borderColor: THEME.PARAGRAPH,
     color: THEME.HEADLINE_TEXT,
     fontFamily: "Montserrat",
-    fontSize: 36,
+    fontSize: 20,
     marginVertical: 10,
+    height: 50,
   },
   btn: {
     alignSelf: "center",
@@ -85,11 +84,12 @@ const styles = StyleSheet.create({
     width: "90%",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 5,
-    borderColor: THEME.PARAGRAPH,
+    borderRadius: 10,
+    backgroundColor:THEME.BUTTON,
     borderWidth: 0.5,
   },
   txt: {
     color: THEME.HEADLINE_TEXT,
+    fontFamily: "Montserrat",
   },
 });

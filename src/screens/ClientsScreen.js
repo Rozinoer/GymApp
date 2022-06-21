@@ -1,17 +1,15 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
   Button,
   ScrollView,
-  SafeAreaView,
-  ImageBackground,
 } from "react-native";
 import { Client } from "../components/Client";
 import { useDispatch, useSelector } from "react-redux";
 import { loadClients } from "../store/actions/client";
 import { THEME } from "../theme";
-import { BottomNavbar } from "../components/BottomNavbar";
+import { BottomNavbar } from "../components/navbar/BottomNavbar";
 
 export const ClientsScreen = ({ navigation }) => {
   const [search, setSearch] = useState("");
@@ -20,7 +18,7 @@ export const ClientsScreen = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(loadClients());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     navigation.setOptions({
@@ -33,16 +31,11 @@ export const ClientsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        {/* {allClients.map((client) => {
+        {allClients.map((client) => {
           return (
             <Client key={client.id} client={client.clientData} navigation={navigation} />
           );
-        })} */}
-        <Client key={"01"} client={{name: "Иван", surname: "Сидоров"}} navigation={navigation} />
-        <Client key={"02"} client={{name: "Константин", surname: "Зыков"}} navigation={navigation} />
-        <Client key={"03"} client={{name: "Петр", surname: "Коваленко"}} navigation={navigation} />
-        <Client key={"04"} client={{name: "Дарья", surname: "Блумкина"}} navigation={navigation} />
-        <Client key={"05"} client={{name: "Мария", surname: "Иванова"}} navigation={navigation} />
+        })}
       </ScrollView>
       <BottomNavbar navigation={navigation} />
     </View>

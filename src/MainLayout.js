@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ClientsScreen } from "./screens/ClientsScreen";
-import { AboutClient } from "./screens/AboutClient";
+import { OtherProfileScreen } from "./screens/OtherProfileScreen";
 import { AddNewPlan } from "./screens/AddNewPlan";
 import { ProfileScreen } from "./screens/ProfileScreen";
 import { SignInScreen } from "./screens/EnterScreens/SignInScreen";
@@ -12,11 +12,10 @@ import { THEME } from "./theme";
 import { useSelector } from "react-redux";
 import { AddNewDay } from "./screens/AddNewDay";
 import { ChatScreen } from "./screens/ChatScreen";
+import { DialogScreen } from "./screens/DialogScreen";
 export const MainLayout = () => {
   const Stack = createNativeStackNavigator();
-
   const authToken = useSelector((state) => state.auth.userToken);
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -38,7 +37,7 @@ export const MainLayout = () => {
               name="Clients"
               component={ClientsScreen}
               options={{
-                title: "List of clients",
+                title: "Подопечные",
                 headerShadowVisible: false,
                 headerSearchBarOptions: true,
                 headerSearchBarOptions: {
@@ -54,12 +53,32 @@ export const MainLayout = () => {
               }}
             />
 
-            <Stack.Screen name="ChatScreen" component={ChatScreen} />
+            <Stack.Screen
+              name="ChatScreen"
+              component={ChatScreen}
+              options={{
+                title:'Чаты',
+                headerStyle: {
+                  backgroundColor: "black",
+                },
+                headerTitleStyle: {
+                  color: "white",
+                },
+              }}
+            />
+            <Stack.Screen name="DialogScreen" component={DialogScreen}               options={{
+                headerStyle: {
+                  backgroundColor: "black",
+                },
+                headerTitleStyle: {
+                  color: "white",
+                },
+              }} />
             <Stack.Screen name="AddNewPlan" component={AddNewPlan} />
             <Stack.Screen name="AddNewDay" component={AddNewDay} />
             <Stack.Screen
               name="Info"
-              component={AboutClient}
+              component={OtherProfileScreen}
               options={{
                 title: "",
                 headerShadowVisible: false,

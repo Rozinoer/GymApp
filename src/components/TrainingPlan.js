@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import {
-  Button,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Modal,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Modal } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import {THEME} from '../theme'
+import { THEME } from "../theme";
 
 export const TrainingPlan = ({ plan }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,21 +22,38 @@ export const TrainingPlan = ({ plan }) => {
               {plan.days.map((day) => {
                 if (day.drills.length !== 0) {
                   return (
-                    <View style={styles.drillInfo}>
-                      <Text style={{ fontSize: 30 }}>{day.day}</Text>
+                    <View style={styles.drillInfo} key={Date.now() + Math.random()}>
+                      <Text
+                        style={{ fontSize: 30, color: THEME.HEADLINE_TEXT }}
+                      >
+                        {day.day}
+                      </Text>
                       {day.drills.map((drill) => {
                         return (
-                          <View style={{ marginVertical: 20 }}>
-                            <Text style={{ fontSize: 20 }}>{drill.title}</Text>
+                          <View style={{ marginVertical: 20 }} key={Date.now() + Math.random()}>
+                            <Text
+                              style={{
+                                fontSize: 20,
+                                color: THEME.HEADLINE_TEXT,
+                              }}
+                            >
+                              {drill.title}
+                            </Text>
                             <View
                               style={{
                                 flexDirection: "row",
                                 justifyContent: "space-around",
                               }}
                             >
-                              <Text>Подходы: {drill.approaches}</Text>
-                              <Text>Повторения: {drill.repeat}</Text>
-                              <Text>Отдых: {drill.rest} сек</Text>
+                              <Text style={{ color: THEME.HEADLINE_TEXT }}>
+                                Подходы: {drill.approaches}
+                              </Text>
+                              <Text style={{ color: THEME.HEADLINE_TEXT }}>
+                                Повторения: {drill.repeat}
+                              </Text>
+                              <Text style={{ color: THEME.HEADLINE_TEXT }}>
+                                Отдых: {drill.rest} сек
+                              </Text>
                             </View>
                           </View>
                         );
@@ -53,10 +63,19 @@ export const TrainingPlan = ({ plan }) => {
                 }
               })}
             </View>
-            <Button
+            <TouchableOpacity
+              style={{
+                backgroundColor: THEME.BUTTON,
+                width: "70%",
+                height: 40,
+                borderRadius: 10,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
               onPress={() => setModalVisible(!modalVisible)}
-              title="Хорошо"
-            ></Button>
+            >
+              <Text style={{ fontWeight: "bold" }}>Хорошо</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -65,7 +84,9 @@ export const TrainingPlan = ({ plan }) => {
         onPress={() => setModalVisible(!modalVisible)}
       >
         <View style={{ justifyContent: "space-between" }}>
-          <Text style={{ color: THEME.HEADLINE_TEXT, fontSize: 20 }}>{plan.title}</Text>
+          <Text style={{ color: THEME.HEADLINE_TEXT, fontSize: 20 }}>
+            {plan.title}
+          </Text>
           <Text style={{ color: THEME.HEADLINE_TEXT }}>{plan.discription}</Text>
           <View style={{ flexDirection: "row", marginBottom: 10 }}>
             <AntDesign name="user" size={24} color={THEME.HEADLINE_TEXT} />
@@ -75,7 +96,9 @@ export const TrainingPlan = ({ plan }) => {
         <View style={styles.drills}>
           {plan.days.map((day) => {
             if (day.drills.length !== 0)
-              return <Text style={{ color: THEME.HEADLINE_TEXT }}>{day.day}</Text>;
+              return (
+                <Text style={{ color: THEME.HEADLINE_TEXT }} key={Date.now() + Math.random()}>{day.day}</Text>
+              );
           })}
         </View>
       </TouchableOpacity>
@@ -85,7 +108,7 @@ export const TrainingPlan = ({ plan }) => {
 
 const styles = StyleSheet.create({
   plan: {
-    height: 200,
+    height: 100,
     backgroundColor: THEME.BACKGROUND,
     borderTopWidth: 0.1,
     borderBottomWidth: 0.2,
@@ -107,10 +130,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22,
   },
-  drillInfo: {},
   modalView: {
     width: "100%",
     backgroundColor: THEME.BACKGROUND,
+    borderColor: THEME.BACKGROUND_DATE,
+    borderWidth: 3,
     borderRadius: 20,
     padding: 15,
     alignItems: "center",

@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Button,
-  ActivityIndicator,
-} from "react-native";
-import { BottomNavbar } from "../components/BottomNavbar";
+import { View, StyleSheet, Button, ActivityIndicator } from "react-native";
+import { BottomNavbar } from "../components/navbar/BottomNavbar";
 import { TrainingPlan } from "../components/TrainingPlan";
 import { ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,8 +11,7 @@ import { THEME } from "../theme";
 export const ExBase = ({ navigation }) => {
   const plans = useSelector((state) => state.drillPlan.allPlan);
   const isLoaded = useSelector((state) => state.drillPlan.isPlanLoaded);
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -34,16 +28,9 @@ export const ExBase = ({ navigation }) => {
       {isLoaded ? (
         <View style={styles.profile}>
           <ScrollView style={styles.scrollView}>
-          {plans.map((plan) => {
-          return (
-            <>
-            <TrainingPlan plan={plan} />
-            <TrainingPlan plan={plan} />
-            <TrainingPlan plan={plan} />
-            <TrainingPlan plan={plan} />
-            </>
-          );
-        })}
+            {plans.map((plan) => {
+              return <TrainingPlan key={plan.key} plan={plan} />;
+            })}
           </ScrollView>
           <View>
             <BottomNavbar navigation={navigation} />

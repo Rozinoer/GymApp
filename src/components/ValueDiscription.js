@@ -14,7 +14,7 @@ export const ValueDiscription = ({ value, discription, stylename }) => {
   return (
     <View style={styleobject}>
       <ProfileText value={value} flag="1" />
-      <ProfileText value={discription} />
+      {discription ? <ProfileText value={discription} /> : null}
     </View>
   );
 };
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   statistics: {
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },

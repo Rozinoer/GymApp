@@ -8,7 +8,9 @@ import {
   getDocs,
   query,
   where,
+  orderBy
 } from "@firebase/firestore";
+import { serverTimestamp } from "@firebase/firestore";
 import { auth } from "./firebase";
 
 const week = [
@@ -21,7 +23,7 @@ const week = [
   "Sunday",
   "Понедельник",
   "Вторник",
-  "Четверг"
+  "Четверг",
 ];
 export const db = getFirestore();
 
@@ -102,6 +104,7 @@ const loadDays = async (doc) => {
     title: doc.title,
     discription: doc.discription,
     days: [],
+    key: doc.id,
   };
   for (const day of week) {
     const dayRef = collection(
@@ -150,5 +153,46 @@ export const getClients = async () => {
   querySnapshot.forEach((doc) => {
     allClients = [...allClients, { id: doc.id, clientData: doc.data() }];
   });
-  return allClients
+  return allClients;
 };
+
+export const getDialogs = async () => {
+  const docSnap = await getDoc(doc(db, "dialogs", auth.currentUser.uid));
+  if (docSnap.exists()) {
+    const { dialogs } = docSnap.data();
+    return dialogs
+  }
+};
+
+export const getUser = async (key) => {
+  const docSnap = await getDoc(doc(db, 'users', key))
+  if (docSnap.exists()) {
+    const user = docSnap.data()
+    return ({
+        name: user.name,
+        lastname: user.surname,
+        userId: key
+    })
+  }
+}
+
+export const getDialog = async (messageRef) => {
+  let messagesArr = []
+  const q = query(collection(messageRef, "messages"), orderBy('timestamp'))
+  const snap = await getDocs(q);
+  snap.forEach((doc) => {
+    const object = doc.data();
+    messagesArr.push({...object, key: doc.id});
+  });
+  return messagesArr
+}
+
+export const setMessage = async (text, messageRef) => {
+  console.log(text)
+  await addDoc(collection(messageRef, 'messages'),{
+    text,
+    sender: auth.currentUser.uid,
+    timestamp: serverTimestamp()
+  })
+  return auth.currentUser.uid
+}

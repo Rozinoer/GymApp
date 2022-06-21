@@ -20,12 +20,13 @@ export const drillPlanReducer = (state = initialState, action) => {
         ],
       };
     case "LOAD_PLANS":
+      
       return {
         ...state,
         allPlan: action.data,
         isPlanLoaded: true,
       };
     default:
-      return initialState;
+      return state;
   }
 };

@@ -22,13 +22,22 @@ export const Event = ({ date, month, user, time, duration, type }) => {
           </Text>
           <Text>{type}</Text>
         </View>
-        <View style={{ flexDirection: "row",alignItems:'center', height: "33%" }}>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", height: "33%" }}
+        >
           <Text style={{ color: THEME.BACKGROUND_DATE }}>{user}</Text>
         </View>
-        <View style={{ flexDirection: "row",alignItems:'center', height: "33%", width: '100%' }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            height: "33%",
+            width: "100%",
+          }}
+        >
           <Text style={{ color: THEME.BACKGROUND_DATE }}>At {time} PM</Text>
           <Text style={{ marginLeft: 10, color: THEME.BACKGROUND_DATE }}>
-           for about {duration} Hour
+            for about {duration} Hour
           </Text>
         </View>
       </View>
@@ -56,7 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     height: "33%",
-    alignItems:'center'
+    alignItems: "center",
   },
   eventDiscription: {
     paddingLeft: 10,

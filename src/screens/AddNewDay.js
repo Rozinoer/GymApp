@@ -7,6 +7,7 @@ import {
   Modal,
   Alert,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -24,7 +25,7 @@ export const AddNewDay = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const saveDay = () => {
-    dispatch(addDay({ title, drill }));
+    dispatch(addDay( title, drill ));
     navigation.navigate("AddNewPlan");
   };
   const saveDrill = () => {
@@ -42,14 +43,14 @@ export const AddNewDay = ({ navigation }) => {
     <View style={styles.container}>
       <TextInput
         style={styles.TextInput}
-        placeholder="День недели"
+        placeholder="День"
         placeholderTextColor={THEME.HEADLINE_TEXT}
         onChangeText={(text) => setTitle(text)}
       ></TextInput>
       <ScrollView>
         {drill.map((d) => {
           return (
-            <View style={styles.drill} key={Date.now()}>
+            <View style={styles.drill} key={Date.now() + Math.random()}>
               <Text style={styles.text}>{d.drillName}</Text>
               <View
                 style={{
@@ -65,12 +66,17 @@ export const AddNewDay = ({ navigation }) => {
           );
         })}
       </ScrollView>
-      <Button
-        title="Добавить упражнение"
-        onPress={() => setModalVisible(!modalVisible)}
-      ></Button>
-      <Button onPress={() => saveDay()} title="Сохранить день"></Button>
-
+      <View style={{ marginBottom: 30 }}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => setModalVisible(!modalVisible)}
+        >
+          <Text style={styles.text}>Добавить упражнение</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn} onPress={() => saveDay()}>
+          <Text style={styles.text}>Сохранить день</Text>
+        </TouchableOpacity>
+      </View>
       <Modal
         animationType="slide"
         transparent={true}
@@ -83,22 +89,33 @@ export const AddNewDay = ({ navigation }) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <TextInput
-              placeholder="Упражнения"
+              style={{ marginBottom: 10, fontSize: 20, color: THEME.HEADLINE_TEXT }}
+              placeholderTextColor={THEME.PARAGRAPH}
+              placeholder="Упражнение"
               onChangeText={(text) => setDrillName(text)}
             ></TextInput>
             <TextInput
+              style={{ marginBottom: 10, fontSize: 20,color: THEME.HEADLINE_TEXT }}
+              placeholderTextColor={THEME.PARAGRAPH}
               placeholder="Подходы"
               onChangeText={(text) => setApproaches(text)}
             ></TextInput>
             <TextInput
+              style={{ marginBottom: 10, fontSize: 20,color: THEME.HEADLINE_TEXT }}
+              placeholderTextColor={THEME.PARAGRAPH}
               placeholder="Повторения"
               onChangeText={(text) => setRepeat(text)}
             ></TextInput>
             <TextInput
+              style={{ marginBottom: 10, fontSize: 20,color: THEME.HEADLINE_TEXT }}
+              placeholderTextColor={THEME.PARAGRAPH}
               placeholder="Отдых"
               onChangeText={(text) => setRest(text)}
             ></TextInput>
-            <Button onPress={() => saveDrill()} title="Добавить"></Button>
+
+            <TouchableOpacity style={{...styles.btn, marginTop: 20}} onPress={() => saveDrill()}>
+              <Text style={styles.text}>Добавить</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -114,9 +131,10 @@ const styles = StyleSheet.create({
   TextInput: {
     color: THEME.HEADLINE_TEXT,
     fontFamily: "Montserrat",
-    fontSize: 25,
+    fontSize: 20,
     borderBottomColor: THEME.PARAGRAPH,
     borderWidth: 0.2,
+    height: 50,
   },
   centeredView: {
     flex: 1,
@@ -125,8 +143,11 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
+    width: "100%",
     margin: 20,
     backgroundColor: THEME.BACKGROUND,
+    borderWidth: 3,
+    borderColor: THEME.BACKGROUND_DATE,
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -145,7 +166,19 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.2,
     marginVertical: 20,
   },
+  btn: {
+    alignSelf: "center",
+    height: 50,
+    marginBottom: 10,
+    width: "90%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    backgroundColor: THEME.BUTTON,
+    borderWidth: 0.5,
+  },
   text: {
     color: THEME.HEADLINE_TEXT,
+    fontFamily: "Montserrat",
   },
 });

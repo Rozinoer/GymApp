@@ -31,7 +31,7 @@ export const SignInScreen = ({ navigation }) => {
         RuFit+
       </Text>
       <TextInput
-        placeholder="Username"
+        placeholder="Логин"
         placeholderTextColor={THEME.PARAGRAPH}
         autoCapitalize={"none"}
         onChangeText={(text) => {
@@ -41,7 +41,7 @@ export const SignInScreen = ({ navigation }) => {
         style={styles.textInput}
       ></TextInput>
       <TextInput
-        placeholder="Password"
+        placeholder="Пароль"
         placeholderTextColor={THEME.PARAGRAPH}
         autoCapitalize={"none"}
         secureTextEntry={true}
@@ -52,11 +52,11 @@ export const SignInScreen = ({ navigation }) => {
         style={styles.textInput}
       ></TextInput>
       <View style={styles.button}>
-        <Button color={"white"} title="Sign in" onPress={login}></Button>
+        <Button color={"white"} title="Войти" onPress={login}></Button>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
         <Text style={styles.clientInfoTextDisc}>
-          Don`t have an account? Create here
+          Нет аккаунта? Создайте здесь
         </Text>
       </TouchableOpacity>
     </View>
